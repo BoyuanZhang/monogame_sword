@@ -1,0 +1,9 @@
+C:\GitRepos\monogame_swordRPG\SellSword\SellSword\bin\WindowsGL\Debug\SellSword.exe
+C:\GitRepos\monogame_swordRPG\SellSword\SellSword\bin\WindowsGL\Debug\SellSword.pdb
+C:\GitRepos\monogame_swordRPG\SellSword\SellSword\bin\WindowsGL\Debug\Lidgren.Network.dll
+C:\GitRepos\monogame_swordRPG\SellSword\SellSword\bin\WindowsGL\Debug\MonoGame.Framework.dll
+C:\GitRepos\monogame_swordRPG\SellSword\SellSword\bin\WindowsGL\Debug\OpenTK.dll
+C:\GitRepos\monogame_swordRPG\SellSword\SellSword\bin\WindowsGL\Debug\Tao.Sdl.dll
+C:\GitRepos\monogame_swordRPG\SellSword\SellSword\obj\x86\Debug\SellSword.csprojResolveAssemblyReference.cache
+C:\GitRepos\monogame_swordRPG\SellSword\SellSword\obj\x86\Debug\SellSword.exe
+C:\GitRepos\monogame_swordRPG\SellSword\SellSword\obj\x86\Debug\SellSword.pdb
