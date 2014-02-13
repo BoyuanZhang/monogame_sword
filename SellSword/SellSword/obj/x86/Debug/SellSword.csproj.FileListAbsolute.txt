@@ -7,3 +7,4 @@ C:\GitRepos\monogame_swordRPG\SellSword\SellSword\bin\WindowsGL\Debug\Tao.Sdl.dl
 C:\GitRepos\monogame_swordRPG\SellSword\SellSword\obj\x86\Debug\SellSword.csprojResolveAssemblyReference.cache
 C:\GitRepos\monogame_swordRPG\SellSword\SellSword\obj\x86\Debug\SellSword.exe
 C:\GitRepos\monogame_swordRPG\SellSword\SellSword\obj\x86\Debug\SellSword.pdb
+C:\GitRepos\monogame_swordRPG\SellSword\SellSword\bin\WindowsGL\Debug\Content\MonoGameContent\Sprites\MarioSprite.xnb
