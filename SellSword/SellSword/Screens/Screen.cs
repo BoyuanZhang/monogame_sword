@@ -11,7 +11,7 @@ namespace SellSword.Screens
 {
     public class Screen
     {
-        public Screen() { }
+        protected Screen() { }
 
         public virtual void LoadContent( ContentManager content) { }
 

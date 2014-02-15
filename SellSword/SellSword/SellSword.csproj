@@ -36,6 +36,14 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Gameplay\Camera\PlayerCamera.cs" />
+    <Compile Include="Gameplay\Collision\ICollidable.cs" />
+    <Compile Include="Gameplay\Levels\JungTown.cs" />
+    <Compile Include="Gameplay\Levels\Level.cs" />
+    <Compile Include="Gameplay\Managers\LevelManager.cs" />
+    <Compile Include="Gameplay\PartitionTree\IPartitionNode.cs" />
+    <Compile Include="Gameplay\PartitionTree\TreeNode\SpriteNode.cs" />
+    <Compile Include="Gameplay\PartitionTree\TreeNode\TreeNode.cs" />
+    <Compile Include="Gameplay\PartitionTree\TreeNode\TileNode.cs" />
     <Compile Include="Gameplay\SellSwordGame.cs" />
     <Compile Include="Gameplay\Sprites\PlayerSprite.cs" />
     <Compile Include="Gameplay\Sprites\Sprite.cs" />
@@ -69,8 +77,8 @@
     <Content Include="SDL.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Gameplay\Collision\" />
-    <Folder Include="Gameplay\Levels\" />
+    <Folder Include="Content\Levels\" />
+    <Folder Include="Content\Tiles\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\MonoGameContent\Sprites\MarioSprite.xnb">

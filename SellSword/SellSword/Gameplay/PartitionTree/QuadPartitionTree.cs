@@ -10,12 +10,7 @@ using SellSword.Utility;
 
 namespace SellSword.Gameplay.PartitionTree
 {
-    public interface PartitionNode
-    {
-        Rectangle BoundingRectangle { get; }
-    }
-
-    public class QuadPartitionTree<T> where T : PartitionNode
+    public class QuadPartitionTree<T> where T : IPartitionNode
     {
         //Partition section
         public readonly Rectangle partitionBox;

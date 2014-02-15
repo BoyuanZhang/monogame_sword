@@ -10,18 +10,26 @@ using Microsoft.Xna.Framework.Content;
 using SellSword.Screens;
 using SellSword.Gameplay.Sprites;
 using SellSword.Gameplay.Camera;
+using SellSword.Gameplay.Managers;
+using SellSword.Gameplay.Levels;
+using SellSword.Gameplay.PartitionTree;
+using SellSword.Gameplay.PartitionTree.TreeNode;
 
 namespace SellSword.Gameplay
 {
     public class SellSwordGame
     {
         private GameScreen m_gameScreenHandle;
-
         //player
         private PlayerSprite m_player;
-
         //camera
         private PlayerCamera m_playerCamera;
+        //Collision and Drawing partition trees, when the player enters new worlds the trees are populated
+        private QuadPartitionTree<IPartitionNode> m_drawTree;
+        private QuadPartitionTree<IPartitionNode> m_collisionTree;
+
+        //handle to the level manager
+        private LevelManager m_levelManager;
 
         public SellSwordGame( GameScreen gameScreen)
         {
@@ -31,7 +39,6 @@ namespace SellSword.Gameplay
 
         public void UnloadContent()
         {
-
         }
 
         public void LoadContent(ContentManager content)
@@ -41,6 +48,12 @@ namespace SellSword.Gameplay
 
             //init camera
             m_playerCamera = new PlayerCamera(Main.Instance.GraphicsDevice.Viewport, 1.0f);
+
+            m_levelManager = new LevelManager(LevelManager.Levels.JungTown, new JungTown());
+
+            //after everything has been loaded in, we initialize our partition trees, and send them to the current level to be populated
+            m_drawTree = new QuadPartitionTree<IPartitionNode>(m_levelManager.LevelRectangle);
+            m_collisionTree = new QuadPartitionTree<IPartitionNode>(m_levelManager.LevelRectangle);
         }
 
         public void Update(GameTime gameTime)

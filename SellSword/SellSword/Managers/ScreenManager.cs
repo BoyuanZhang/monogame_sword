@@ -39,7 +39,7 @@ namespace SellSword.Managers
             }
         }
 
-        public ScreenManager()
+        private ScreenManager()
         {
             //Since there is no menu / loading functionality yet, just start game state with running
             //change this later when the menu, and load functionality are implemented.
