@@ -8,3 +8,15 @@ C:\GitRepos\monogame_swordRPG\SellSword\SellSword\obj\x86\Debug\SellSword.csproj
 C:\GitRepos\monogame_swordRPG\SellSword\SellSword\obj\x86\Debug\SellSword.exe
 C:\GitRepos\monogame_swordRPG\SellSword\SellSword\obj\x86\Debug\SellSword.pdb
 C:\GitRepos\monogame_swordRPG\SellSword\SellSword\bin\WindowsGL\Debug\Content\MonoGameContent\Sprites\MarioSprite.xnb
+C:\GitRepos\monogame_swordRPG\SellSword\SellSword\bin\WindowsGL\Debug\Content\Levels\jungtown_collision.layer
+C:\GitRepos\monogame_swordRPG\SellSword\SellSword\bin\WindowsGL\Debug\Content\Levels\jungtown_normal.layer
+C:\GitRepos\monogame_swordRPG\SellSword\SellSword\bin\WindowsGL\Debug\TileEngine.dll
+C:\GitRepos\monogame_swordRPG\SellSword\SellSword\bin\WindowsGL\Debug\TileEngine.pdb
+C:\GitRepos\monogame_swordRPG\SellSword\SellSword\bin\WindowsGL\Debug\Content\MonoGameContent\Tiles\beachSand.xnb
+C:\GitRepos\monogame_swordRPG\SellSword\SellSword\bin\WindowsGL\Debug\Content\MonoGameContent\Tiles\se_free_dirt_texture.xnb
+C:\GitRepos\monogame_swordRPG\SellSword\SellSword\bin\WindowsGL\Debug\Content\MonoGameContent\Tiles\se_free_grass_texture.xnb
+C:\GitRepos\monogame_swordRPG\SellSword\SellSword\bin\WindowsGL\Debug\Content\MonoGameContent\Tiles\se_free_ground_texture.xnb
+C:\GitRepos\monogame_swordRPG\SellSword\SellSword\bin\WindowsGL\Debug\Content\MonoGameContent\Tiles\se_free_mud_texture.xnb
+C:\GitRepos\monogame_swordRPG\SellSword\SellSword\bin\WindowsGL\Debug\Content\MonoGameContent\Tiles\se_free_road_texture.xnb
+C:\GitRepos\monogame_swordRPG\SellSword\SellSword\bin\WindowsGL\Debug\Content\MonoGameContent\Tiles\se_free_rock_texture.xnb
+C:\GitRepos\monogame_swordRPG\SellSword\SellSword\bin\WindowsGL\Debug\Content\MonoGameContent\Tiles\treeTile.xnb

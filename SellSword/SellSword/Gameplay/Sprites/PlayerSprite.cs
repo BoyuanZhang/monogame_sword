@@ -11,7 +11,7 @@ namespace SellSword.Gameplay.Sprites
 {
     public class PlayerSprite : Sprite
     {
-        private const float m_speed = 2.0f;
+        private const float m_speed = 3.0f;
         private Vector2 m_velocity;
 
         public PlayerSprite(Texture2D texture, Vector2 position)
@@ -22,9 +22,12 @@ namespace SellSword.Gameplay.Sprites
 
         public override void Update()
         {
+            //Handle user inputs
+            HandleInputs();
+
             //Update our player, as well as his respective bounding rectangle, and the player center
-            m_position.X += m_velocity.X;
-            m_position.Y += m_velocity.Y;
+            m_position.X += (float)Math.Round(m_velocity.X * m_speed);
+            m_position.Y += (float)Math.Round(m_velocity.Y * m_speed);
             m_spriteRectangle.X = (int)m_position.X;
             m_spriteRectangle.Y = (int)m_position.Y;
             m_center.X = m_position.X + m_texture.Width / 2;
@@ -43,14 +46,14 @@ namespace SellSword.Gameplay.Sprites
         private void HandleInputs()
         {
             if (Keyboard.GetState().IsKeyDown(Keys.Left))
-                m_velocity.X = m_speed * -1;
+                m_velocity.X = -1.0f;
             if (Keyboard.GetState().IsKeyDown(Keys.Right))
-                m_velocity.X = m_speed;
+                m_velocity.X = 1.0f;
 
             if (Keyboard.GetState().IsKeyDown(Keys.Up))
-                m_velocity.Y = m_speed * -1;
+                m_velocity.Y = -1.0f;
             if (Keyboard.GetState().IsKeyDown(Keys.Down))
-                m_velocity.Y = m_speed;
+                m_velocity.Y = 1.0f;
 
             if (m_velocity.X != 0 && m_velocity.Y != 0)
                 m_velocity = Vector2.Normalize(m_velocity);

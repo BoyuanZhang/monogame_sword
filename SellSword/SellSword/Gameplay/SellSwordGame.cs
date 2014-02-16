@@ -66,6 +66,7 @@ namespace SellSword.Gameplay
         {
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, null, null, null, null, m_playerCamera.TransformMatrix);
 
+            m_levelManager.DrawCurrentLevel(spriteBatch);
             m_player.Draw(spriteBatch);
 
             spriteBatch.End();

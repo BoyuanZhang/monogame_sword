@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using TileEngine.Map;
+
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
 using SellSword.Gameplay.Managers;
 
@@ -13,14 +16,21 @@ namespace SellSword.Gameplay.Levels
     {
         //Each game location will have it's own content manager for easier handling of game content
         protected ContentManager m_contentManager;
-        protected LevelManager.Levels m_level;
+        protected LevelManager.Levels m_levelEnum;
         protected Rectangle m_levelRectangle;
+        protected TileMap m_levelMap;
 
         protected Level( ContentManager contentManager, LevelManager.Levels level )
         {
             m_contentManager = contentManager;
-            m_level = level;
+            m_levelEnum = level;
             m_levelRectangle = Rectangle.Empty;
+            m_levelMap = new TileMap();
+        }
+
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            m_levelMap.Draw(spriteBatch);
         }
 
         public virtual void UnloadContent() { }

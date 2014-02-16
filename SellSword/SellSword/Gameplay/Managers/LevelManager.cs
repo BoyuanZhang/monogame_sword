@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using Microsoft.Xna.Framework.Graphics;
+
 using SellSword.Gameplay.Levels;
 using Microsoft.Xna.Framework;
 
@@ -27,15 +29,22 @@ namespace SellSword.Gameplay.Managers
 
         public Rectangle LevelRectangle { get { return Rectangle.Empty; } }
 
-        //Level getters
-        public JungTown JungTownLevel
+        
+        //Level getter
+        public Level CurrentLevel
         {
             get
             {
-                if (m_levelDictionary.ContainsKey(Levels.JungTown))
-                    return (JungTown)m_levelDictionary[Levels.JungTown];
+                if (m_levelDictionary.ContainsKey(m_currentLevel))
+                    return m_levelDictionary[m_currentLevel];
                 return null;
             }
+        }
+
+        //Draw current level
+        public void DrawCurrentLevel(SpriteBatch spriteBatch)
+        {
+            CurrentLevel.Draw(spriteBatch);
         }
     }
 }

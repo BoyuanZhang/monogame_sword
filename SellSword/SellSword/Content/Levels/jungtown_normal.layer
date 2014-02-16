@@ -1,0 +1,20 @@
+[Textures]
+C:\GitRepos\monogame_tileSolution\TileEngine\TileEngine\Content\Tiles\se_free_grass_texture.jpg
+C:\GitRepos\monogame_tileSolution\TileEngine\TileEngine\Content\Tiles\se_free_road_texture.jpg
+
+[Properties]
+Alpha = 1
+Layer Type Index = 0
+
+[Layout]
+
+1 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 
+1 , 1 , 1 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 
+0 , 0 , 1 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 
+0 , 0 , 1 , 0 , 0 , 1 , 1 , 1 , 0 , 0 , 
+0 , 0 , 1 , 0 , 0 , 1 , 0 , 1 , 0 , 0 , 
+0 , 0 , 1 , 0 , 0 , 1 , 0 , 1 , 0 , 0 , 
+0 , 0 , 1 , 1 , 1 , 1 , 0 , 1 , 0 , 0 , 
+0 , 0 , 0 , 0 , 0 , 0 , 0 , 1 , 0 , 0 , 
+0 , 0 , 0 , 0 , 0 , 0 , 0 , 1 , 1 , 1 , 
+0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 1 , 
