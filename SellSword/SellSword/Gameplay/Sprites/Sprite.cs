@@ -27,7 +27,5 @@ namespace SellSword.Gameplay.Sprites
         public Vector2 Center { get { return m_center; } }
 
         public virtual void Update() { }
-
-        public virtual void Draw(SpriteBatch spriteBatch) { }
     }
 }

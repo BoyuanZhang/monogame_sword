@@ -41,12 +41,10 @@
     <Compile Include="Gameplay\Levels\Level.cs" />
     <Compile Include="Gameplay\Managers\LevelManager.cs" />
     <Compile Include="Gameplay\PartitionTree\IPartitionNode.cs" />
-    <Compile Include="Gameplay\PartitionTree\TreeNode\SpriteNode.cs" />
-    <Compile Include="Gameplay\PartitionTree\TreeNode\TreeNode.cs" />
-    <Compile Include="Gameplay\PartitionTree\TreeNode\TileNode.cs" />
     <Compile Include="Gameplay\SellSwordGame.cs" />
     <Compile Include="Gameplay\Sprites\PlayerSprite.cs" />
     <Compile Include="Gameplay\Sprites\Sprite.cs" />
+    <Compile Include="Gameplay\Tiles\TreeTile.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Managers\ScreenManager.cs" />
     <Compile Include="Gameplay\PartitionTree\QuadPartitionTree.cs" />
@@ -71,7 +69,8 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
-    <Reference Include="TileEngine">
+    <Reference Include="TileEngine, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\monogame_tileSolution\TileEngine\TileEngine\bin\WindowsGL\Debug\TileEngine.dll</HintPath>
     </Reference>
   </ItemGroup>

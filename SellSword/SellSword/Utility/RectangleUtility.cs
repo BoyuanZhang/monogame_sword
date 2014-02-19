@@ -13,7 +13,7 @@ namespace SellSword.Utility
         //checks if a rectangle is entirely contained within another
         public static bool ContainedWithin(Rectangle containee, Rectangle container)
         {
-            if (containee.Left <= container.Left || containee.Right >= container.Right || containee.Top <= container.Top || containee.Bottom >= container.Bottom)
+            if (containee.Left < container.Left || containee.Right > container.Right || containee.Top < container.Top || containee.Bottom > container.Bottom)
                 return false;
             else
                 return true;

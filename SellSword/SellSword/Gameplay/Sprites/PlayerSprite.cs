@@ -7,9 +7,11 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
+using SellSword.Gameplay.PartitionTree;
+
 namespace SellSword.Gameplay.Sprites
 {
-    public class PlayerSprite : Sprite
+    public class PlayerSprite : Sprite, IPartitionNode
     {
         private const float m_speed = 3.0f;
         private Vector2 m_velocity;
@@ -38,10 +40,12 @@ namespace SellSword.Gameplay.Sprites
             m_velocity.Y = 0.0f;
         }
 
-        public override void Draw(SpriteBatch spriteBatch)
+        public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(m_texture, m_spriteRectangle, Color.White);
         }
+
+        public void HandleCollision() { }
 
         private void HandleInputs()
         {
@@ -58,5 +62,8 @@ namespace SellSword.Gameplay.Sprites
             if (m_velocity.X != 0 && m_velocity.Y != 0)
                 m_velocity = Vector2.Normalize(m_velocity);
         }
+
+        //Properties
+        public Rectangle BoundingRectangle { get { return m_spriteRectangle; } }
     }
 }

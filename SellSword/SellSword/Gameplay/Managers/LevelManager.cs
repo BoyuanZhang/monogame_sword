@@ -27,7 +27,15 @@ namespace SellSword.Gameplay.Managers
         public void AddNewLevel() { }
         public void ChangeLevel() { }
 
-        public Rectangle LevelRectangle { get { return Rectangle.Empty; } }
+        public Rectangle LevelRectangle 
+        { 
+            get {
+                if (m_levelDictionary.ContainsKey(m_currentLevel))
+                    return m_levelDictionary[m_currentLevel].LevelBoundingBox;
+                    
+                return Rectangle.Empty; 
+            } 
+        }
 
         
         //Level getter
@@ -41,7 +49,7 @@ namespace SellSword.Gameplay.Managers
             }
         }
 
-        //Draw current level
+        //Draw entire current level
         public void DrawCurrentLevel(SpriteBatch spriteBatch)
         {
             CurrentLevel.Draw(spriteBatch);

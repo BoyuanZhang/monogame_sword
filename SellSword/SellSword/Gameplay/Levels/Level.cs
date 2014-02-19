@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 
 using TileEngine.Map;
+using TileEngine.Layer;
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -30,10 +31,19 @@ namespace SellSword.Gameplay.Levels
 
         public void Draw(SpriteBatch spriteBatch)
         {
+            //for drawing the entire map (not optimized)
             m_levelMap.Draw(spriteBatch);
         }
 
         public virtual void UnloadContent() { }
         public virtual void LoadContent() { }
+
+        //Properties
+
+        //Get layer list of map
+        public List<GameTileLayer> LevelLayerList { get { return m_levelMap.TileLayerList; } }
+
+        //Get level Rectangle
+        public Rectangle LevelBoundingBox { get { return m_levelRectangle; } }
     }
 }

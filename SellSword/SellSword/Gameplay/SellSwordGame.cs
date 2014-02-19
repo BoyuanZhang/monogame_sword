@@ -13,12 +13,18 @@ using SellSword.Gameplay.Camera;
 using SellSword.Gameplay.Managers;
 using SellSword.Gameplay.Levels;
 using SellSword.Gameplay.PartitionTree;
-using SellSword.Gameplay.PartitionTree.TreeNode;
+using SellSword.Gameplay.Tiles;
+
+using TileEngine.Layer;
+using TileEngine.Layer.Tiles;
 
 namespace SellSword.Gameplay
 {
     public class SellSwordGame
     {
+        public static int VIEWPORTWIDTH = (int)(Main.Instance.GraphicsDevice.Viewport.Width/1.5);
+        public static int VIEWPORTHEIGHT = (int)(Main.Instance.GraphicsDevice.Viewport.Height/1.5);
+
         private GameScreen m_gameScreenHandle;
         //player
         private PlayerSprite m_player;
@@ -27,6 +33,9 @@ namespace SellSword.Gameplay
         //Collision and Drawing partition trees, when the player enters new worlds the trees are populated
         private QuadPartitionTree<IPartitionNode> m_drawTree;
         private QuadPartitionTree<IPartitionNode> m_collisionTree;
+
+        //We only draw items inside this rectangle
+        private Rectangle m_graphicsRectangle;
 
         //handle to the level manager
         private LevelManager m_levelManager;
@@ -54,21 +63,74 @@ namespace SellSword.Gameplay
             //after everything has been loaded in, we initialize our partition trees, and send them to the current level to be populated
             m_drawTree = new QuadPartitionTree<IPartitionNode>(m_levelManager.LevelRectangle);
             m_collisionTree = new QuadPartitionTree<IPartitionNode>(m_levelManager.LevelRectangle);
+
+            //load elements into partition trees
+            PopulateTrees();
+
+            //Set the graphics rectangle
+            m_graphicsRectangle = new Rectangle((int)m_player.Center.X - VIEWPORTWIDTH, (int)m_player.Center.Y - VIEWPORTHEIGHT, VIEWPORTWIDTH * 2, VIEWPORTHEIGHT * 2);
+        }
+
+        public void PopulateTrees()
+        {
+            //Add the level objects to the draw and collision tree
+            //first retrieve all tiles into the corresponding lists. If the layer containing the tiles is a collision layer
+            //we add the tiles in that layer to both the collision and draw tree
+            List<GameTileLayer> layerList = m_levelManager.CurrentLevel.LevelLayerList;
+            foreach( GameTileLayer layer in layerList ) 
+            {
+                List<GameTile> tileList = layer.GetAllTiles();
+                if (layer.LayerLayoutType == LayerType.LayerTypesEnum.Collision)
+                {
+                    foreach (GameTile tile in tileList)
+                    {
+                        if (tile.TextureIndex != -1)
+                        {
+                            TreeTile treeTile = new TreeTile(tile, tile.TextureIndex, layer.Alpha, layer.GetTileIndexTexture);
+                            m_drawTree.Add(treeTile);
+                            m_collisionTree.Add(treeTile);
+                        }
+                    }
+                }
+                else
+                    foreach (GameTile tile in tileList)
+                    {
+                        if (tile.TextureIndex != -1)
+                        {
+                            TreeTile treeTile = new TreeTile(tile, tile.TextureIndex, layer.Alpha, layer.GetTileIndexTexture);
+                            m_drawTree.Add(treeTile);
+                        }
+                    }
+            }
+
+            //Add the player to the draw and collision tree
+            m_drawTree.Add(m_player);
+            m_collisionTree.Add(m_player);
         }
 
         public void Update(GameTime gameTime)
         {
             m_player.Update();
             m_playerCamera.Update(m_player);
+
+            //Update scene Rectangle
+            m_graphicsRectangle.X = (int)m_player.Center.X - VIEWPORTWIDTH;
+            m_graphicsRectangle.Y = (int)m_player.Center.Y - VIEWPORTHEIGHT;
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, null, null, null, null, m_playerCamera.TransformMatrix);
 
-            m_levelManager.DrawCurrentLevel(spriteBatch);
-            m_player.Draw(spriteBatch);
-
+            //Get contained scene objects from partition tree and draw them
+            List<LinkedList<IPartitionNode>> sceneItemList = m_drawTree.GetPartitionItems(m_graphicsRectangle);
+            foreach (LinkedList<IPartitionNode> sceneItems in sceneItemList)
+            {
+                foreach (IPartitionNode item in sceneItems)
+                {
+                    item.Draw(spriteBatch);
+                }
+            }
             spriteBatch.End();
         }
     }
