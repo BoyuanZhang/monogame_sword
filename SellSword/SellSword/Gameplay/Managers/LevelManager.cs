@@ -24,6 +24,10 @@ namespace SellSword.Gameplay.Managers
             m_levelDictionary.Add( Levels.JungTown, levelObj );
         }
 
+        public void UpdateCurrentLevel()
+        {
+
+        }
         public void AddNewLevel() { }
         public void ChangeLevel() { }
 

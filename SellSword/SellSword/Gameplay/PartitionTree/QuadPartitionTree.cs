@@ -24,6 +24,9 @@ namespace SellSword.Gameplay.PartitionTree
         //objects contained within current partition
         public readonly LinkedList<T> m_itemList;
 
+        //keep track of moveable objects for easier moving of items throughout partition tree, this is shared across all partition trees
+        public static Dictionary<T, QuadPartitionTree<T>> m_moveableDict = new Dictionary<T,QuadPartitionTree<T>>();
+
         private static List<LinkedList<T>> m_itemsInsideBound = new List<LinkedList<T>>();
         private int maxItems = 3;
 
@@ -59,6 +62,13 @@ namespace SellSword.Gameplay.PartitionTree
                     {
                         //No children and max items haven't been reached yet, add another item to this trees item list
                         m_itemList.AddLast(item);
+                        //if the item is moveable, we add it to the moveable dictionary for referencing
+                        if (item.Moveable)
+                        {
+                            //if dictionary doesn't contain item we add it
+                            if (!m_moveableDict.ContainsKey(item))
+                                m_moveableDict.Add(item, this);
+                        }
                         return true;
                     }
                     else
@@ -75,6 +85,12 @@ namespace SellSword.Gameplay.PartitionTree
                                 m_itemList.AddLast(item);
                                 if (m_itemList.Count >= maxItems)
                                     maxItems++;
+
+                                if (item.Moveable)
+                                {
+                                    if (!m_moveableDict.ContainsKey(item))
+                                        m_moveableDict.Add(item, this);
+                                }
                             }
 
                 return true;
@@ -82,6 +98,108 @@ namespace SellSword.Gameplay.PartitionTree
             else
                 return false;
         }
+
+        public void RemoveItem( T item, Rectangle containingRectangle)
+        {
+            if (leftTopPartition != null)
+            {
+                if (RectangleUtility.ContainedWithin(containingRectangle, leftTopPartition.partitionBox))
+                    leftTopPartition.RemoveItem(item, containingRectangle);
+                if (RectangleUtility.ContainedWithin(containingRectangle, rightTopPartition.partitionBox))
+                    rightTopPartition.RemoveItem(item, containingRectangle);
+                if (RectangleUtility.ContainedWithin(containingRectangle, leftBottomPartition.partitionBox))
+                    leftBottomPartition.RemoveItem(item, containingRectangle);
+                if (RectangleUtility.ContainedWithin(containingRectangle, rightBottomPartition.partitionBox))
+                    rightBottomPartition.RemoveItem(item, containingRectangle);
+                else
+                {
+                    if (m_itemList.Contains(item))
+                    {
+                        m_itemList.Remove(item);
+                        if (m_moveableDict.ContainsKey(item))
+                            m_moveableDict.Remove(item);
+                    }
+                }
+            }
+            else
+            {
+                if (m_itemList.Contains(item))
+                {
+                    m_itemList.Remove(item);
+                    if (m_moveableDict.ContainsKey(item))
+                        m_moveableDict.Remove(item);
+                }
+            }
+        }
+
+        public void UpdateMoveableItems()
+        {
+            Dictionary<T, QuadPartitionTree<T>> temporaryDict = new Dictionary<T, QuadPartitionTree<T>>(m_moveableDict);
+            foreach (KeyValuePair<T, QuadPartitionTree<T>> pair in temporaryDict)
+            {
+                if (!RectangleUtility.ContainedWithin(pair.Key.BoundingRectangle, pair.Value.partitionBox))
+                {
+                    //item is no longer contained within this quad
+                    pair.Value.m_itemList.Remove(pair.Key);
+                    //make sure there is a parent partition (There should always be a parent partition)
+                    if (pair.Value.parentPartition != null)
+                        MoveItemUpQuad(pair.Key, pair.Value.parentPartition);
+                }
+                else
+                {
+                    //otherwise see if the item has been moved to a lower quad
+                    if (pair.Value.leftTopPartition != null)
+                    {
+                        //check if item can be contained with lower partitions
+                        MoveItemDownQuad(pair.Key, pair.Value);
+                    }
+                }
+            }
+        }
+
+        private void MoveItemDownQuad(T item, QuadPartitionTree<T> quad)
+        {
+            if (RectangleUtility.ContainedWithin(item.BoundingRectangle, quad.leftTopPartition.partitionBox))
+            {
+                m_moveableDict.Remove(item);
+                quad.m_itemList.Remove(item);
+                quad.leftTopPartition.Add(item);
+            }
+            else if (RectangleUtility.ContainedWithin(item.BoundingRectangle, quad.rightTopPartition.partitionBox))
+            {
+                m_moveableDict.Remove(item);
+                quad.m_itemList.Remove(item);
+                quad.rightTopPartition.Add(item);
+            }
+            else if (RectangleUtility.ContainedWithin(item.BoundingRectangle, quad.leftBottomPartition.partitionBox))
+            {
+                m_moveableDict.Remove(item);
+                quad.m_itemList.Remove(item);
+                quad.leftBottomPartition.Add(item);
+            }
+            else if (RectangleUtility.ContainedWithin(item.BoundingRectangle, quad.rightBottomPartition.partitionBox))
+            {
+                m_moveableDict.Remove(item);
+                quad.m_itemList.Remove(item);
+                quad.rightBottomPartition.Add(item);
+            }
+        }
+
+        private void MoveItemUpQuad(T item, QuadPartitionTree<T> quad)
+        {
+            if (RectangleUtility.ContainedWithin(item.BoundingRectangle, quad.partitionBox))
+            {
+                //To reach here the key must exist
+                //remove the current dictionary entry
+                m_moveableDict.Remove(item);
+                quad.Add(item);
+            }
+            else
+                if (quad.parentPartition != null)
+                    MoveItemUpQuad(item, quad.parentPartition);
+        }
+
+
 
         //For visualization of quadtree only, remove or comment out this method when running game for non-test / debug pruposes
         //--------------------------------------------------------------------

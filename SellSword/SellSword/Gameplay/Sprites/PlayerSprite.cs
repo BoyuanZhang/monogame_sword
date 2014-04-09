@@ -20,6 +20,7 @@ namespace SellSword.Gameplay.Sprites
             : base(texture, position)
         {
             m_velocity = Vector2.Zero;
+            m_moveable = true;
         }
 
         public override void Update()
@@ -65,5 +66,6 @@ namespace SellSword.Gameplay.Sprites
 
         //Properties
         public Rectangle BoundingRectangle { get { return m_spriteRectangle; } }
+        public bool Moveable { get { return m_moveable; } }
     }
 }

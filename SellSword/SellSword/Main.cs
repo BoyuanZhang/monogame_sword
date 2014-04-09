@@ -21,6 +21,11 @@ namespace SellSword
         //Singleton instance of the Main
         private static Main instance;
 
+        //Testing Variables -----------------------------------------------------------------------------------------------
+        //time interval can be used for fps tracking through the console.
+        static float g_timeInterval = 0;
+        //Testing Variables -----------------------------------------------------------------------------------------------
+
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
@@ -97,6 +102,18 @@ namespace SellSword
 
             // TODO: Add your drawing code here
             ScreenManager.Instance.Draw(spriteBatch);
+
+            //Uncomment for frame rate testing ----------------------------------------------------------------------------------
+            double frameRate = 1 / gameTime.ElapsedGameTime.TotalSeconds;
+
+            g_timeInterval += (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            if (g_timeInterval > 5)
+            {
+                System.Console.WriteLine(frameRate);
+                g_timeInterval = 0;
+            }
+            //Uncomment for frame rate testing ----------------------------------------------------------------------------------
 
             base.Draw(gameTime);
         }

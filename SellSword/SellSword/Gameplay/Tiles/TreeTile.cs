@@ -19,6 +19,7 @@ namespace SellSword.Gameplay.Tiles
         private GameTile m_gameTile;
         private int m_textureIndex;
         private float m_alphaChannel;
+        private bool m_moveable;
         private GetTileTexture m_tileTextureDelegate;
 
         public TreeTile(GameTile tile, int textureIndex, float alphaChannel, GetTileTexture getTileTexture)
@@ -26,6 +27,7 @@ namespace SellSword.Gameplay.Tiles
             m_gameTile = tile;
             m_textureIndex = textureIndex;
             m_alphaChannel = alphaChannel;
+            m_moveable = false;
 
             m_tileTextureDelegate = getTileTexture;
         }
@@ -37,6 +39,7 @@ namespace SellSword.Gameplay.Tiles
         }
 
         public Rectangle BoundingRectangle { get { return m_gameTile.TileRectangle; } }
+        public bool Moveable { get { return m_moveable; } }
         public int TextureIndex { get { return m_textureIndex; } }
 
         public void HandleCollision() { }

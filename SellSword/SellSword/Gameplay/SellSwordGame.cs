@@ -110,12 +110,21 @@ namespace SellSword.Gameplay
 
         public void Update(GameTime gameTime)
         {
+            //Update player
             m_player.Update();
             m_playerCamera.Update(m_player);
+
+            //Update everything in current level
+            m_levelManager.UpdateCurrentLevel();
+
+            //Handle all collisions
 
             //Update scene Rectangle
             m_graphicsRectangle.X = (int)m_player.Center.X - VIEWPORTWIDTH;
             m_graphicsRectangle.Y = (int)m_player.Center.Y - VIEWPORTHEIGHT;
+
+            //Upate all moveable game objects in the tree that contains all items
+            m_drawTree.UpdateMoveableItems();
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -124,12 +133,22 @@ namespace SellSword.Gameplay
 
             //Get contained scene objects from partition tree and draw them
             List<LinkedList<IPartitionNode>> sceneItemList = m_drawTree.GetPartitionItems(m_graphicsRectangle);
+            List<IPartitionNode> moveableItems = new List<IPartitionNode>();
             foreach (LinkedList<IPartitionNode> sceneItems in sceneItemList)
             {
                 foreach (IPartitionNode item in sceneItems)
                 {
-                    item.Draw(spriteBatch);
+                    //if item is a moveable type we append it to a list of items we will draw afterwards
+                    if (item.Moveable == true)
+                        moveableItems.Add(item);
+                    else
+                        item.Draw(spriteBatch);
                 }
+            }
+            //Draw all moveable items on top now
+            foreach (IPartitionNode item in moveableItems)
+            {
+                item.Draw(spriteBatch);
             }
             spriteBatch.End();
         }

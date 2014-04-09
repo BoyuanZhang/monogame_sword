@@ -15,6 +15,8 @@ namespace SellSword.Gameplay.PartitionTree
     {
         Rectangle BoundingRectangle { get; }
 
+        bool Moveable { get; }
+
         void Draw(SpriteBatch spriteBatch);
 
         void HandleCollision();

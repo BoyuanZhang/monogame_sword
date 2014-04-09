@@ -36,6 +36,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Gameplay\Camera\PlayerCamera.cs" />
+    <Compile Include="Gameplay\Collision\CollisionManager.cs" />
     <Compile Include="Gameplay\Collision\ICollidable.cs" />
     <Compile Include="Gameplay\Levels\JungTown.cs" />
     <Compile Include="Gameplay\Levels\Level.cs" />

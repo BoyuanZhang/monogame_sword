@@ -14,6 +14,7 @@ namespace SellSword.Gameplay.Sprites
         protected Vector2 m_position;
         protected Rectangle m_spriteRectangle;
         protected Vector2 m_center;
+        protected bool m_moveable;
 
         protected Sprite(Texture2D texture, Vector2 position)
         {
